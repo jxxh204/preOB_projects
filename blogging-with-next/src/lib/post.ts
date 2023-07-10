@@ -7,7 +7,6 @@ import remarkHtml from 'remark-html';
 const postPath = '/src/__posts'
 
 export async function getPostData(id:string) { // id : md 파일 이름.
-  console.log(id)
   const postsDirectory = path.join(process.cwd(), postPath);
     const fullPath = path.join(postsDirectory, `${id}.md`);
     
@@ -34,19 +33,7 @@ export function getAllPostIds() {
     const postsDirectory = path.join(process.cwd(), postPath);
     const fileNames = fs.readdirSync(postsDirectory); // 대상 디렉토리의 모든 파일을 들고옴.
   
-    // Returns an array that looks like this:
-    // [
-    //   {
-    //     params: {
-    //       id: 'ssg-ssr'
-    //     }
-    //   },
-    //   {
-    //     params: {
-    //       id: 'pre-rendering'
-    //     }
-    //   }
-    // ]
+    console.log("🚀 ~ file: post.ts:37 ~ getAllPostIds ~ fileNames:", fileNames)
     return fileNames.map((fileName) => {
       return {
         params: {

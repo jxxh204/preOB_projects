@@ -3,14 +3,14 @@ categories:
   - Development
   - VIM
 date: "2012-04-06"
-description: 테스트 페이지
+description: 블로그2입니다.
 slug: spf13-vim-3-0-release-and-new-website
 tags:
   - .vimrc
   - plugins
   - spf13-vim
   - vim
-title: test
+title: blog2
 id: 123
 ---
 

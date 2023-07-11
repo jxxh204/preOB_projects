@@ -8,7 +8,7 @@ const postPath = '/src/__posts'
 
 export async function getPostData(id:string) { // id : md 파일 이름.
   const postsDirectory = path.join(process.cwd(), postPath);
-    const fullPath = path.join(postsDirectory, `${id}.md`);
+    const fullPath = path.join(postsDirectory, `${id}.mdx`);
     
     const fileContents = fs.readFileSync(fullPath, 'utf8');
   
@@ -29,7 +29,6 @@ export async function getPostData(id:string) { // id : md 파일 이름.
     };
   }
 export function getAllPostIds() {
-  // const dirPath = path.resolve(__dirname, postPath)
     const postsDirectory = path.join(process.cwd(), postPath);
     const fileNames = fs.readdirSync(postsDirectory); // 대상 디렉토리의 모든 파일을 들고옴.
   
@@ -37,8 +36,25 @@ export function getAllPostIds() {
     return fileNames.map((fileName) => {
       return {
         params: {
-          id: fileName.replace(/\.md$/, ''),
+          id: fileName.replace(/\.mdx$/, ''),
         },
       };
     });
   }
+export const getAllPostData = () => {
+  const postsDirectory = path.join(process.cwd(), postPath);
+  const fileNames = fs.readdirSync(postsDirectory); // 대상 디렉토리의 모든 파일을 들고옴.
+  const posts:GetPostDataType[] = [];
+   fileNames.map((fileName) => {
+    getPostData(fileName.replace(/\.mdx$/, '')).then((post) => {
+      posts.push(post)
+    }).then(() =>{
+      return posts
+    }).catch((error) => {
+      return error
+    })
+  });
+
+  return posts;
+ 
+}
